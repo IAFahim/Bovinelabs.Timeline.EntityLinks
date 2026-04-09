@@ -1,33 +1,26 @@
+/* com.bovinelabs.timeline.entity.links/Runtime/Data.cs */
 using BovineLabs.EntityLinks;
 using BovineLabs.Timeline.Instantiate;
 using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Transforms;
 
 namespace BovineLabs.Timeline.EntityLinks
 {
-    public struct EntityLinkAttachState : IComponentData
+    public struct EntityLinkAttachConfig : IComponentData
     {
-        public byte LinkKey;
+        public byte Key;
         public ResolveRule ResolveRule;
         public ParentTransformConfig TransformConfig;
-        
-        public Entity CapturedPreviousParent;
-        public LocalTransform CapturedOriginalTransform;
-        public bool HadPostTransformMatrix;
-        public float4x4 CapturedPostTransformMatrix;
-
-        public bool WasSuccessfullyAttached;
-        public Entity ResolvedTarget;
     }
 
     public struct EntityLinkInstantiateConfig : IComponentData
     {
         public Entity Prefab;
-        public byte LinkKey;
+        public byte Key;
         public ResolveRule ResolveRule;
         public ParentTransformConfig TransformConfig;
     }
 
+    public struct OnClipActiveEntityLinkAttachTag : IComponentData { }
+    
     public struct OnClipActiveEntityLinkInstantiateTag : IComponentData { }
 }
