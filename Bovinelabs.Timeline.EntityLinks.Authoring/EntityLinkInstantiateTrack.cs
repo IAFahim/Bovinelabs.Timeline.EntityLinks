@@ -4,7 +4,7 @@ using BovineLabs.Timeline.Authoring;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-namespace Bovinelabs.Timeline.Entity.Links.Authoring
+namespace Bovinelabs.Timeline.EntityLinks.Authoring
 {
     [Serializable]
     [TrackClipType(typeof(EntityLinkInstantiateClip))]

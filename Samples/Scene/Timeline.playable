@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b4c0ba4ba9c4b3b8ea2a309feac1b9f, type: 3}
   m_Name: EntityLinkInstantiateClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.Entity.Links.Authoring::Bovinelabs.Timeline.Entity.Links.Authoring.EntityLinkInstantiateClip
+  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::Bovinelabs.Timeline.EntityLinks.Authoring.EntityLinkInstantiateClip
   Prefab: {fileID: 7912966824055113308, guid: 951de27fae0f19b47887d9c49647f931, type: 3}
   LinkSchema: {fileID: 11400000, guid: 396eae5308942e2c5a06a0975df02c43, type: 2}
   ResolveRule: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e37e953766f64893b4f199a5ff9dcda6, type: 3}
   m_Name: EntityLinkInstantiateClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.Entity.Links.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkInstantiateClip
+  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkInstantiateClip
   prefab: {fileID: 7912966824055113308, guid: 951de27fae0f19b47887d9c49647f931, type: 3}
   linkKey: 1
   resolveRule: 9
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89e095c5d7cf4c2682bd1819f3bdd9b8, type: 3}
   m_Name: Entity Link Attach Track
-  m_EditorClassIdentifier: Bovinelabs.Timeline.Entity.Links.Authoring::Bovinelabs.Timeline.Entity.Links.Authoring.EntityLinkAttachTrack
+  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::Bovinelabs.Timeline.EntityLinks.Authoring.EntityLinkAttachTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
@@ -158,10 +158,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f45a4e8156464115bc0df841c0eb9c46, type: 3}
   m_Name: EntityLinkAttachClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.Entity.Links.Authoring::Bovinelabs.Timeline.Entity.Links.Authoring.EntityLinkAttachClip
+  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::Bovinelabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
   LinkSchema: {fileID: 11400000, guid: e171bfe1e0df23080a0cd0d1e36236d2, type: 2}
   ResolveRule: 1
-  TransformFlags: 7
+  TransformFlags: 255
 --- !u!114 &4699248473348086526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 699ebe62a9ab47af9c28510a97c405c7, type: 3}
   m_Name: Entity Link Instantiate Track
-  m_EditorClassIdentifier: Bovinelabs.Timeline.Entity.Links.Authoring::Bovinelabs.Timeline.Entity.Links.Authoring.EntityLinkInstantiateTrack
+  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::Bovinelabs.Timeline.EntityLinks.Authoring.EntityLinkInstantiateTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
@@ -266,6 +266,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22f27407e87d4776b5607416dc8d650f, type: 3}
   m_Name: EntityLinkAttachClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.Entity.Links.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
+  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
   linkKey: 6
   resolveRule: 9

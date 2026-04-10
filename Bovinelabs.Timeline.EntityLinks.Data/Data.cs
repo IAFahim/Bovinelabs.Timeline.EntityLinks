@@ -3,12 +3,12 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace Bovinelabs.Timeline.Entity.Links.Data
+namespace Bovinelabs.Timeline.EntityLinks.Data
 {
     public struct EntityLookupStoreData : IBufferElementData
     {
         public byte Tag;
-        public Unity.Entities.Entity Value;
+        public Entity Value;
     }
 
     [Flags]
@@ -28,8 +28,8 @@ namespace Bovinelabs.Timeline.Entity.Links.Data
 
     public struct EntityLinkAttachState : IComponentData
     {
-        public Unity.Entities.Entity ResolvedTarget;
-        public Unity.Entities.Entity CapturedPreviousParent;
+        public Entity ResolvedTarget;
+        public Entity CapturedPreviousParent;
         public LocalTransform CapturedOriginalTransform;
         public float4x4 CapturedOriginalPTM;
         public bool IsAttached;
@@ -38,7 +38,7 @@ namespace Bovinelabs.Timeline.Entity.Links.Data
 
     public struct EntityLinkInstantiateConfig : IComponentData
     {
-        public Unity.Entities.Entity Prefab;
+        public Entity Prefab;
         public byte LinkKey;
         public ResolveRule ResolveRule;
         public AttachmentTransformFlags TransformFlags;

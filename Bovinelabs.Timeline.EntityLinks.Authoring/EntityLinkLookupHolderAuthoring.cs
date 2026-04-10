@@ -1,15 +1,18 @@
 using System;
-using System.Collections.Generic;
-using Bovinelabs.Timeline.Entity.Links.Data;
+using Bovinelabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.Entity.Links.Authoring
+namespace Bovinelabs.Timeline.EntityLinks.Authoring
 {
     public class EntityLinkLookupHolderAuthoring : MonoBehaviour
     {
         public EntityTagAuthoring[] links = Array.Empty<EntityTagAuthoring>();
-        private void OnValidate() => links = GetComponentsInChildren<EntityTagAuthoring>(true);
+
+        private void OnValidate()
+        {
+            links = GetComponentsInChildren<EntityTagAuthoring>(true);
+        }
 
         public class EntityLinkLookupResolverBaker : Baker<EntityLinkLookupHolderAuthoring>
         {
@@ -18,13 +21,11 @@ namespace Bovinelabs.Timeline.Entity.Links.Authoring
                 var buffer = AddBuffer<EntityLookupStoreData>(GetEntity(TransformUsageFlags.None));
 
                 foreach (var entityTagsMonoBehavior in holderAuthoring.links)
-                {
                     buffer.Add(new EntityLookupStoreData
                     {
                         Tag = entityTagsMonoBehavior.tag.Id,
-                        Value = GetEntity(entityTagsMonoBehavior, TransformUsageFlags.None),
+                        Value = GetEntity(entityTagsMonoBehavior, TransformUsageFlags.None)
                     });
-                }
             }
         }
     }

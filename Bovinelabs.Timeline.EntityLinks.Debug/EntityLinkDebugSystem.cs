@@ -2,7 +2,7 @@
 using BovineLabs.Core;
 using BovineLabs.Quill;
 using BovineLabs.Timeline.Data;
-using Bovinelabs.Timeline.Entity.Links.Data;
+using Bovinelabs.Timeline.EntityLinks.Data;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -10,9 +10,10 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.Entity.Links.Debug
+namespace Bovinelabs.Timeline.EntityLinks.Debug
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.LocalSimulation | WorldSystemFilterFlags.ServerSimulation | WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.Editor)]
+    [WorldSystemFilter(WorldSystemFilterFlags.LocalSimulation | WorldSystemFilterFlags.ServerSimulation |
+                       WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.Editor)]
     [UpdateInGroup(typeof(DebugSystemGroup))]
     public partial struct EntityLinkDebugSystem : ISystem
     {
@@ -25,12 +26,7 @@ namespace Bovinelabs.Timeline.Entity.Links.Debug
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var renderer = SystemAPI.GetSingleton<DrawSystem.Singleton>().CreateDrawer<EntityLinkDebugSystem>();
-            if (!renderer.IsEnabled)
-            {
-                return;
-            }
-
+            var renderer = SystemAPI.GetSingleton<DrawSystem.Singleton>().CreateDrawer();
             state.Dependency = new RenderTransition
             {
                 Renderer = renderer,
@@ -45,22 +41,19 @@ namespace Bovinelabs.Timeline.Entity.Links.Debug
             public Drawer Renderer;
             [ReadOnly] public ComponentLookup<LocalToWorld> WorldSpace;
 
-            private void Execute(in EntityLinkAttachState state, in EntityLinkAttachConfig config, in TrackBinding binding)
+            private void Execute(in EntityLinkAttachState state, in EntityLinkAttachConfig config,
+                in TrackBinding binding)
             {
-                if (!state.IsAttached || state.ResolvedTarget == Unity.Entities.Entity.Null)
-                {
-                    return;
-                }
+                if (!state.IsAttached || state.ResolvedTarget == Entity.Null) return;
 
-                if (this.WorldSpace.TryGetComponent(binding.Value, out var origin) && this.WorldSpace.TryGetComponent(state.ResolvedTarget, out var destination))
-                {
-                    this.RenderManifold(origin.Position, destination.Position, config.LinkKey);
-                }
+                if (WorldSpace.TryGetComponent(binding.Value, out var origin) &&
+                    WorldSpace.TryGetComponent(state.ResolvedTarget, out var destination))
+                    RenderManifold(origin.Position, destination.Position, config.LinkKey);
             }
 
             private void RenderManifold(float3 origin, float3 destination, byte domain)
             {
-                var hue = (domain * 0.618033988749895f) % 1.0f;
+                var hue = domain * 0.618033988749895f % 1.0f;
                 var tint = Color.HSVToRGB(hue, 0.8f, 0.9f);
                 var span = math.distance(origin, destination);
                 var apex = (origin + destination) * 0.5f;
@@ -80,8 +73,8 @@ namespace Bovinelabs.Timeline.Entity.Links.Debug
                     node = vertex;
                 }
 
-                this.Renderer.Lines(path.AsArray(), tint);
-                this.Renderer.Point(destination, 0.05f, tint);
+                Renderer.Lines(path.AsArray(), tint);
+                Renderer.Point(destination, 0.05f, tint);
 
                 path.Dispose();
             }

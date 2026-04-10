@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.Entity.Links.Authoring
+namespace Bovinelabs.Timeline.EntityLinks.Authoring
 {
     [CreateAssetMenu(menuName = "BovineLabs/EntityLinks/Tag")]
     public class EntityLinkTagSchema : ScriptableObject
@@ -9,6 +9,6 @@ namespace Bovinelabs.Timeline.Entity.Links.Authoring
         [Tooltip("Unique byte identifier for this link type. Must be unique across all EntityLinkTagSchema.")]
         private byte id;
 
-        public byte Id => this.id;
+        public byte Id => id;
     }
 }

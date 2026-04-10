@@ -1,7 +1,7 @@
 using BovineLabs.Core.Authoring;
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.Entity.Links.Authoring
+namespace Bovinelabs.Timeline.EntityLinks.Authoring
 {
     public class EntityTagAuthoring : MonoBehaviour
     {
@@ -10,9 +10,7 @@ namespace Bovinelabs.Timeline.Entity.Links.Authoring
         private void OnValidate()
         {
             if (!transform.gameObject.TryGetComponent(out TransformAuthoring transformAuthoring))
-            {
                 transform.gameObject.AddComponent<TransformAuthoring>();
-            }
         }
     }
 }

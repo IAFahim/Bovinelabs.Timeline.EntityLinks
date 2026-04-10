@@ -1,8 +1,8 @@
-using Bovinelabs.Timeline.Entity.Links.Data;
+using Bovinelabs.Timeline.EntityLinks.Data;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace Bovinelabs.Timeline.Entity.Links
+namespace Bovinelabs.Timeline.EntityLinks
 {
     public struct TopologyResult
     {
@@ -39,9 +39,9 @@ namespace Bovinelabs.Timeline.Entity.Links
 
                     var originScale = ExtractScale(originWorld.Value);
                     var destScale = ExtractScale(destinationWorld.Value);
-                    
+
                     var compensatedScale = originScale / math.max(destScale, 1e-6f);
-                    
+
                     result.PostTransform = float4x4.Scale(compensatedScale);
                     result.HasPostTransform = true;
                 }
@@ -49,14 +49,14 @@ namespace Bovinelabs.Timeline.Entity.Links
                 {
                     // Maintains exact world position/rotation/scale despite new parent
                     var localMatrix = math.mul(math.inverse(destinationWorld.Value), originWorld.Value);
-                    
+
                     result.Local.Position = localMatrix.c3.xyz;
-                    
+
                     var c0 = localMatrix.c0.xyz;
                     var c1 = localMatrix.c1.xyz;
                     var c2 = localMatrix.c2.xyz;
                     var scale = new float3(math.length(c0), math.length(c1), math.length(c2));
-                    
+
                     // Normalize columns to prevent rotational shearing
                     var rotMatrix = new float4x4(
                         new float4(c0 / math.max(scale.x, 1e-6f), 0),
@@ -64,10 +64,10 @@ namespace Bovinelabs.Timeline.Entity.Links
                         new float4(c2 / math.max(scale.z, 1e-6f), 0),
                         new float4(0, 0, 0, 1)
                     );
-                    
+
                     result.Local.Rotation = new quaternion(rotMatrix);
                     result.Local.Scale = 1f;
-                    
+
                     result.PostTransform = float4x4.Scale(scale);
                     result.HasPostTransform = true;
                 }
@@ -75,19 +75,19 @@ namespace Bovinelabs.Timeline.Entity.Links
             else if (flags.HasAny(AttachmentTransformFlags.SetTransform))
             {
                 result.Local.Position = destinationWorld.Position;
-                
+
                 var c0 = destinationWorld.Value.c0.xyz;
                 var c1 = destinationWorld.Value.c1.xyz;
                 var c2 = destinationWorld.Value.c2.xyz;
                 var scale = new float3(math.length(c0), math.length(c1), math.length(c2));
-                
+
                 var rotMatrix = new float4x4(
                     new float4(c0 / math.max(scale.x, 1e-6f), 0),
                     new float4(c1 / math.max(scale.y, 1e-6f), 0),
                     new float4(c2 / math.max(scale.z, 1e-6f), 0),
                     new float4(0, 0, 0, 1)
                 );
-                
+
                 result.Local.Rotation = new quaternion(rotMatrix);
                 result.Local.Scale = 1f;
                 result.PostTransform = float4x4.Scale(scale);
