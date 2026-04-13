@@ -5,7 +5,7 @@ namespace Bovinelabs.Timeline.EntityLinks.Authoring
 {
     public class EntityTagAuthoring : MonoBehaviour
     {
-        public EntityLinkTagSchema tag;
+        public EntityLinkTagSchema entityLinkTagSchema;
 
         private void OnValidate()
         {

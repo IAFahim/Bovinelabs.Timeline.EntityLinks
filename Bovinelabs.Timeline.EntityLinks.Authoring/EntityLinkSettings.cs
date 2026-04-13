@@ -1,14 +1,32 @@
 using System;
 using System.Collections.Generic;
+using BovineLabs.Core.Keys;
 using BovineLabs.Core.Settings;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Bovinelabs.Timeline.EntityLinks.Authoring
 {
     [SettingsGroup("EntityLinks")]
-    public class EntityLinkSettings : ScriptableObject, ISettings
+    public class EntityLinkSettings : KSettingsBase<EntityLinkSettings, byte>
     {
-        [SerializeField] private EntityLinkTagSchema[] keys = Array.Empty<EntityLinkTagSchema>();
-        public IReadOnlyCollection<EntityLinkTagSchema> Keys => keys;
+        [SerializeField] private EntityLinkTagSchema[] entityLinkTagSchemas = Array.Empty<EntityLinkTagSchema>();
+        public IReadOnlyList<EntityLinkTagSchema> EntityLinkTagSchemas => entityLinkTagSchemas;
+        public static byte GetIndex(EntityLinkTagSchema inputActionReference) => NameToKey((FixedString32Bytes)inputActionReference.name);
+        public override IEnumerable<NameValue<byte>> Keys
+        {
+            get
+            {
+                for (byte index = 0; index < entityLinkTagSchemas.Length; index++)
+                {
+                    var entityLinkTagSchema = entityLinkTagSchemas[index];
+                    var actionName = entityLinkTagSchema != null
+                        ? entityLinkTagSchema.name
+                        : $"[Unassigned Action ID: {index}]";
+
+                    yield return new NameValue<byte>(actionName, index);
+                }
+            }
+        }
     }
 }

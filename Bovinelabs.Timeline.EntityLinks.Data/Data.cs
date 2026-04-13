@@ -1,4 +1,5 @@
 using System;
+using BovineLabs.Core.ObjectManagement;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -9,14 +10,6 @@ namespace BovineLabs.Timeline.EntityLinks.Data
     {
         public byte Tag;
         public Entity Value;
-    }
-
-    [Flags]
-    public enum AttachmentTransformFlags : byte
-    {
-        None = 0,
-        SetParent = 1 << 0,
-        SetTransform = 1 << 1
     }
 
     [Flags]
@@ -35,25 +28,20 @@ namespace BovineLabs.Timeline.EntityLinks.Data
     {
         public byte LinkKey;
         public ResolveRule ResolveRule;
-        public AttachmentTransformFlags TransformFlags;
     }
 
     public struct EntityLinkAttachState : IComponentData
     {
         public Entity ResolvedTarget;
         public Entity CapturedPreviousParent;
-        public LocalTransform CapturedOriginalTransform;
-        public float4x4 CapturedOriginalPTM;
         public bool IsAttached;
-        public bool HadPostTransformMatrix;
     }
 
     public struct EntityLinkInstantiateConfig : IComponentData
     {
-        public Entity Prefab;
+        public ObjectId Prefab;
         public byte LinkKey;
         public ResolveRule ResolveRule;
-        public AttachmentTransformFlags TransformFlags;
     }
 
     public static class ResolveRuleExtensions
@@ -61,14 +49,6 @@ namespace BovineLabs.Timeline.EntityLinks.Data
         public static bool HasAny(this ResolveRule rule, in ResolveRule flags)
         {
             return (rule & flags) != 0;
-        }
-    }
-
-    public static class AttachmentTransformFlagsExtensions
-    {
-        public static bool HasAny(this AttachmentTransformFlags configuration, in AttachmentTransformFlags flags)
-        {
-            return (configuration & flags) != 0;
         }
     }
 }

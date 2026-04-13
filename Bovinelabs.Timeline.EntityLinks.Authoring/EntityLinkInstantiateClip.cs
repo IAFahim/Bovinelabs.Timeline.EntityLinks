@@ -1,21 +1,20 @@
 using BovineLabs.Core.Authoring;
+using BovineLabs.Core.Authoring.ObjectManagement;
 using BovineLabs.Timeline.Authoring;
 using Bovinelabs.Timeline.EntityLinks.Authoring;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     public sealed class EntityLinkInstantiateClip : DOTSClip, ITimelineClipAsset
     {
-        public GameObject Prefab;
-        public EntityLinkTagSchema LinkSchema;
-        public ResolveRule ResolveRule = ResolveRule.Parent;
-
-        public AttachmentTransformFlags TransformFlags = AttachmentTransformFlags.SetParent | AttachmentTransformFlags.SetTransform;
-
+        public ObjectDefinition objectDefinition;
+        public EntityLinkTagSchema entityLinkTagSchema;
+        public ResolveRule resolveRule = ResolveRule.Parent;
         public override double duration => 1;
 
         public ClipCaps clipCaps => ClipCaps.None;
@@ -29,10 +28,9 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 
             context.Baker.AddComponent(clipEntity, new EntityLinkInstantiateConfig
             {
-                Prefab = context.Baker.GetEntity(Prefab, TransformUsageFlags.None),
-                LinkKey = LinkSchema != null ? LinkSchema.Id : (byte)0,
-                ResolveRule = ResolveRule,
-                TransformFlags = TransformFlags
+                Prefab = objectDefinition,
+                LinkKey = EntityLinkSettings.GetIndex(entityLinkTagSchema),
+                ResolveRule = resolveRule
             });
 
             base.Bake(clipEntity, context);

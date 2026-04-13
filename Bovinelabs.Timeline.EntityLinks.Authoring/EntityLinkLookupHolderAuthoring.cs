@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine;
@@ -11,22 +12,31 @@ namespace Bovinelabs.Timeline.EntityLinks.Authoring
 
         private void OnValidate()
         {
-            links = GetComponentsInChildren<EntityTagAuthoring>(true);
+            links = GetComponentsInChildren<EntityTagAuthoring>(true)
+                .Where(entityTagAuthoring => entityTagAuthoring.GetComponentInParent<EntityLinkLookupHolderAuthoring>() == this)
+                .ToArray();
         }
 
-        public class EntityLinkLookupResolverBaker : Baker<EntityLinkLookupHolderAuthoring>
+        public class EntityLinkLookupHolderBaker : Baker<EntityLinkLookupHolderAuthoring>
         {
-            public override void Bake(EntityLinkLookupHolderAuthoring holderAuthoring)
+            public override void Bake(EntityLinkLookupHolderAuthoring authoring)
             {
                 var buffer = AddBuffer<EntityLookupStoreData>(GetEntity(TransformUsageFlags.None));
+                foreach (var entityTagAuthoring in authoring.links)
+                {
+                    var entityLinkTagSchema = entityTagAuthoring.entityLinkTagSchema;
+                    if (entityLinkTagSchema == null)
+                    {
+                        Debug.LogError(entityTagAuthoring.name, entityTagAuthoring);
+                        continue;
+                    }
 
-                foreach (var entityTagsMonoBehavior in holderAuthoring.links)
                     buffer.Add(new EntityLookupStoreData
-                        {
-                            Tag = entityTagsMonoBehavior.tag.Id,
-                            Value = GetEntity(entityTagsMonoBehavior, TransformUsageFlags.None)
-                        }
-                    );
+                    {
+                        Tag = EntityLinkSettings.GetIndex(entityLinkTagSchema),
+                        Value = GetEntity(entityTagAuthoring, TransformUsageFlags.None)
+                    });
+                }
             }
         }
     }

@@ -17,11 +17,9 @@
     "Unity.Mathematics.Extensions",
     "Unity.Physics",
     "Unity.Transforms",
-    "BovineLabs.EntityLinks",
     "BovineLabs.Timeline.Authoring",
-    "BovineLabs.Timeline.Instantiate",
     "Unity.Timeline",
-    "BovineLabs.EntityLinks.Authoring"
+    "BovineLabs.Reaction.Authoring"
   ],
   "optionalUnityReferences": [],
   "includePlatforms": [],

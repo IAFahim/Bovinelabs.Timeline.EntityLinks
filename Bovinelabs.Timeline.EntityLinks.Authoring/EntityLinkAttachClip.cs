@@ -10,11 +10,8 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     public sealed class EntityLinkAttachClip : DOTSClip, ITimelineClipAsset
     {
-        public EntityLinkTagSchema LinkSchema;
-        public ResolveRule ResolveRule = ResolveRule.Parent;
-
-        public AttachmentTransformFlags TransformFlags = AttachmentTransformFlags.SetParent | AttachmentTransformFlags.SetTransform;
-
+        public EntityLinkTagSchema entityLinkTagSchema;
+        public ResolveRule resolveRule = ResolveRule.Parent;
         public override double duration => 1;
 
         public ClipCaps clipCaps => ClipCaps.None;
@@ -28,16 +25,14 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 
             context.Baker.AddComponent(clipEntity, new EntityLinkAttachConfig
             {
-                LinkKey = LinkSchema != null ? LinkSchema.Id : (byte)0,
-                ResolveRule = ResolveRule,
-                TransformFlags = TransformFlags
+                LinkKey = EntityLinkSettings.GetIndex(entityLinkTagSchema),
+                ResolveRule = resolveRule,
             });
 
             context.Baker.AddComponent(clipEntity, new EntityLinkAttachState
             {
                 ResolvedTarget = Entity.Null,
                 CapturedPreviousParent = Entity.Null,
-                CapturedOriginalTransform = LocalTransform.Identity,
                 IsAttached = false
             });
 
