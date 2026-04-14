@@ -5,14 +5,14 @@ using BovineLabs.Timeline.Authoring;
 using BovineLabs.Timeline.EntityLinks.Authoring;
 using UnityEngine.Timeline;
 
-namespace Bovinelabs.Timeline.EntityLinks.Authoring
+namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     [Serializable]
-    [TrackClipType(typeof(EntityLinkAttachClip))]
-    [TrackColor(0.2f, 0.8f, 0.4f)]
+    [TrackClipType(typeof(EntityLinkInstantiateClip))]
+    [TrackColor(0.9f, 0.6f, 0.2f)]
     [TrackBindingType(typeof(TargetsAuthoring))]
-    [DisplayName("BovineLabs/Timeline/Entity Links/Attach Track")]
-    public sealed class EntityLinkAttachTrack : DOTSTrack
+    [DisplayName("BovineLabs/Timeline/Entity Links/Instantiate Track")]
+    public sealed class EntityLinkInstantiateTrack : DOTSTrack
     {
     }
 }

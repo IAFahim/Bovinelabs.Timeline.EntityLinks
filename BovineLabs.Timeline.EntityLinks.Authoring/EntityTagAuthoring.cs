@@ -1,8 +1,8 @@
 using BovineLabs.Core.Authoring;
-using Bovinelabs.Timeline.EntityLinks.Data;
+using BovineLabs.Timeline.EntityLinks.Data;
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.EntityLinks.Authoring
+namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     public class EntityTagAuthoring : MonoBehaviour
     {

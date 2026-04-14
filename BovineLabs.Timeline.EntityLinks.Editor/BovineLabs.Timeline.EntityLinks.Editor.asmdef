@@ -1,14 +1,14 @@
 {
-  "name": "Bovinelabs.Timeline.EntityLinks.Editor",
+  "name": "BovineLabs.Timeline.EntityLinks.Editor",
   "rootNamespace": "",
   "references": [
     "BovineLabs.Core",
     "BovineLabs.Core.Editor",
     "BovineLabs.Core.Extensions",
     "BovineLabs.Core.Extensions.Editor",
-    "Bovinelabs.Timeline.EntityLinks",
-    "Bovinelabs.Timeline.EntityLinks.Authoring",
-    "Bovinelabs.Timeline.EntityLinks.Data",
+    "BovineLabs.Timeline.EntityLinks",
+    "BovineLabs.Timeline.EntityLinks.Authoring",
+    "BovineLabs.Timeline.EntityLinks.Data",
     "Unity.Burst",
     "Unity.Collections",
     "Unity.Entities",

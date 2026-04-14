@@ -4,7 +4,7 @@ using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.EntityLinks.Authoring
+namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     public class EntityLinkLookupBlobAuthoring : MonoBehaviour
     {

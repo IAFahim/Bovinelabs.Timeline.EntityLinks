@@ -1,6 +1,6 @@
 using BovineLabs.Core.Authoring.ObjectManagement;
 using BovineLabs.Timeline.Authoring;
-using Bovinelabs.Timeline.EntityLinks.Data;
+using BovineLabs.Timeline.EntityLinks.Data;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine.Timeline;

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using BovineLabs.Core.Keys;
 using BovineLabs.Core.Settings;
-using Bovinelabs.Timeline.EntityLinks.Data;
+using BovineLabs.Timeline.EntityLinks.Data;
 using UnityEngine;
 
-namespace Bovinelabs.Timeline.EntityLinks.Authoring
+namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     [SettingsGroup("EntityLinks")]
     public class EntityLinkSettings : KSettingsBase<EntityLinkSettings, byte>

@@ -31,7 +31,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c61869e665cb4717bef70f263ad5e857, type: 3}
   m_Name: PlayerInputCancelWindowClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.PlayerInputs.Authoring::Bovinelabs.Timeline.PlayerInputs.Authoring.PlayerInputCancelWindowClip
+  m_EditorClassIdentifier: BovineLabs.Timeline.PlayerInputs.Authoring::BovineLabs.Timeline.PlayerInputs.Authoring.PlayerInputCancelWindowClip
   inputActionReferences: []
 --- !u!114 &-4795396796215624092
 MonoBehaviour:
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89e095c5d7cf4c2682bd1819f3bdd9b8, type: 3}
   m_Name: Entity Link Attach Track
-  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::Bovinelabs.Timeline.EntityLinks.Authoring.EntityLinkAttachTrack
+  m_EditorClassIdentifier: BovineLabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkAttachTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f45a4e8156464115bc0df841c0eb9c46, type: 3}
   m_Name: EntityLinkAttachClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::Bovinelabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
+  m_EditorClassIdentifier: BovineLabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
   entityLinkTagSchema: {fileID: 11400000, guid: e171bfe1e0df23080a0cd0d1e36236d2, type: 2}
   resolveRule: 4
 --- !u!114 &-1683009330099079295
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e37e953766f64893b4f199a5ff9dcda6, type: 3}
   m_Name: EntityLinkInstantiateClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkInstantiateClip
+  m_EditorClassIdentifier: BovineLabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkInstantiateClip
   prefab: {fileID: 7912966824055113308, guid: 951de27fae0f19b47887d9c49647f931, type: 3}
   linkKey: 1
   resolveRule: 9
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 816838b6ee5447fb8bb17200f57ecf42, type: 3}
   m_Name: Player Input Condition Invoker Track
-  m_EditorClassIdentifier: Bovinelabs.Timeline.PlayerInputs.Authoring::Bovinelabs.Timeline.PlayerInputs.Authoring.PlayerInputConditionInvokerTrack
+  m_EditorClassIdentifier: BovineLabs.Timeline.PlayerInputs.Authoring::BovineLabs.Timeline.PlayerInputs.Authoring.PlayerInputConditionInvokerTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b425d7adf694ab7915d282f1eb58557, type: 3}
   m_Name: Player Input Buffer Clear Track
-  m_EditorClassIdentifier: Bovinelabs.Timeline.PlayerInputs.Authoring::Bovinelabs.Timeline.PlayerInputs.Authoring.PlayerInputBufferClearTrack
+  m_EditorClassIdentifier: BovineLabs.Timeline.PlayerInputs.Authoring::BovineLabs.Timeline.PlayerInputs.Authoring.PlayerInputBufferClearTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4193bef2695d41f9a39e9cf052512d79, type: 3}
   m_Name: PlayerInputConditionInvokerClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.PlayerInputs.Authoring::Bovinelabs.Timeline.PlayerInputs.Authoring.PlayerInputConditionInvokerClip
+  m_EditorClassIdentifier: BovineLabs.Timeline.PlayerInputs.Authoring::BovineLabs.Timeline.PlayerInputs.Authoring.PlayerInputConditionInvokerClip
   inputActionReference: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   phase: 1
   condition: {fileID: 11400000, guid: 0a741c9d2622a8d2aaf56ac5e1ac9d5d, type: 2}
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f25f743515c24bdc97f2d87042322b7b, type: 3}
   m_Name: PlayerInputBufferClearClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.PlayerInputs.Authoring::Bovinelabs.Timeline.PlayerInputs.Authoring.PlayerInputBufferClearClip
+  m_EditorClassIdentifier: BovineLabs.Timeline.PlayerInputs.Authoring::BovineLabs.Timeline.PlayerInputs.Authoring.PlayerInputBufferClearClip
   actionsToClear: []
 --- !u!114 &7593822311261907031
 MonoBehaviour:
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22f27407e87d4776b5607416dc8d650f, type: 3}
   m_Name: EntityLinkAttachClip
-  m_EditorClassIdentifier: Bovinelabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
+  m_EditorClassIdentifier: BovineLabs.Timeline.EntityLinks.Authoring::BovineLabs.Timeline.EntityLinks.Authoring.EntityLinkAttachClip
   linkKey: 6
   resolveRule: 9
 --- !u!114 &8329585062532576727
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5db6c625b954865a5942fe042f0a5d6, type: 3}
   m_Name: Player Input Cancel Window Track
-  m_EditorClassIdentifier: Bovinelabs.Timeline.PlayerInputs.Authoring::Bovinelabs.Timeline.PlayerInputs.Authoring.PlayerInputCancelWindowTrack
+  m_EditorClassIdentifier: BovineLabs.Timeline.PlayerInputs.Authoring::BovineLabs.Timeline.PlayerInputs.Authoring.PlayerInputCancelWindowTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0

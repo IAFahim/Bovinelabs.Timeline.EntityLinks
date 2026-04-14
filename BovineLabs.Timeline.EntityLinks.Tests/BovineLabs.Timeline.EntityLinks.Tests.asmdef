@@ -1,12 +1,12 @@
 {
-  "name": "Bovinelabs.Timeline.EntityLinks.Authoring",
+  "name": "BovineLabs.Timeline.EntityLinks.Tests",
   "rootNamespace": "",
   "references": [
     "BovineLabs.Core",
-    "BovineLabs.Core.Authoring",
     "BovineLabs.Core.Extensions",
-    "BovineLabs.Core.Extensions.Authoring",
-    "Bovinelabs.Timeline.EntityLinks.Data",
+    "BovineLabs.Testing",
+    "BovineLabs.Timeline.EntityLinks",
+    "BovineLabs.Timeline.EntityLinks.Data",
     "Unity.Burst",
     "Unity.Collections",
     "Unity.Entities",
@@ -15,22 +15,22 @@
     "Unity.InputSystem",
     "Unity.Mathematics",
     "Unity.Mathematics.Extensions",
+    "Unity.PerformanceTesting",
     "Unity.Physics",
-    "Unity.Transforms",
-    "BovineLabs.Timeline.Authoring",
-    "Unity.Timeline",
-    "BovineLabs.Reaction.Authoring"
+    "Unity.Transforms"
   ],
-  "optionalUnityReferences": [],
-  "includePlatforms": [],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
   "excludePlatforms": [],
   "allowUnsafeCode": true,
   "overrideReferences": false,
   "precompiledReferences": [],
   "autoReferenced": false,
-  "defineConstraints": [
-    "UNITY_EDITOR"
-  ],
+  "defineConstraints": [],
   "versionDefines": [],
   "noEngineReferences": false
 }

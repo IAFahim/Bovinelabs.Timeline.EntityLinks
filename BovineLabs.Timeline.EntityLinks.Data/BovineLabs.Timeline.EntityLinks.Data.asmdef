@@ -1,5 +1,5 @@
 {
-  "name": "Bovinelabs.Timeline.EntityLinks.Data",
+  "name": "BovineLabs.Timeline.EntityLinks.Data",
   "rootNamespace": "",
   "references": [
     "BovineLabs.Core",

@@ -1,12 +1,12 @@
 {
-  "name": "Bovinelabs.Timeline.EntityLinks.Debug",
+  "name": "BovineLabs.Timeline.EntityLinks.Debug",
   "rootNamespace": "",
   "references": [
     "BovineLabs.Anchor",
     "BovineLabs.Core",
     "BovineLabs.Core.Extensions",
-    "Bovinelabs.Timeline.EntityLinks",
-    "Bovinelabs.Timeline.EntityLinks.Data",
+    "BovineLabs.Timeline.EntityLinks",
+    "BovineLabs.Timeline.EntityLinks.Data",
     "Unity.AppUI",
     "Unity.AppUI.MVVM",
     "Unity.AppUI.Navigation",

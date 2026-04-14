@@ -1,11 +1,11 @@
 {
-  "name": "Bovinelabs.Timeline.EntityLinks",
+  "name": "BovineLabs.Timeline.EntityLinks",
   "rootNamespace": "",
   "references": [
     "BovineLabs.Anchor",
     "BovineLabs.Core",
     "BovineLabs.Core.Extensions",
-    "Bovinelabs.Timeline.EntityLinks.Data",
+    "BovineLabs.Timeline.EntityLinks.Data",
     "Unity.AppUI",
     "Unity.AppUI.MVVM",
     "Unity.AppUI.Navigation",

@@ -6,6 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.1.0] - 2026-04-08
 
-### This is the first release of *\<Bovinelabs.Timeline.EntityLinks\>*.
+### This is the first release of *\<BovineLabs.Timeline.EntityLinks\>*.
 
 *Short description of this release*
