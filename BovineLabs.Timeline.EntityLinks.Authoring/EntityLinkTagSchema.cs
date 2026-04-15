@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BovineLabs.Timeline.EntityLinks.Data
+namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     [CreateAssetMenu(menuName = "BovineLabs/EntityLinks/Tag")]
     public class EntityLinkTagSchema : ScriptableObject

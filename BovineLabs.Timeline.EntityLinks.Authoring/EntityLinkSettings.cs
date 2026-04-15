@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using BovineLabs.Core.Keys;
 using BovineLabs.Core.Settings;
-using BovineLabs.Timeline.EntityLinks.Data;
 using UnityEngine;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring

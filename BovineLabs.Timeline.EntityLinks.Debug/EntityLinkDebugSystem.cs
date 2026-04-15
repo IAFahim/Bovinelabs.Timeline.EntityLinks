@@ -4,7 +4,6 @@ using BovineLabs.Core.Extensions;
 using BovineLabs.Core.Iterators;
 using BovineLabs.Quill;
 using BovineLabs.Timeline.Data;
-using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -48,14 +47,8 @@ namespace BovineLabs.Timeline.EntityLinks.Debug
             public Drawer Renderer;
             [ReadOnly] public UnsafeComponentLookup<LocalToWorld> WorldSpace;
 
-            private void Execute(in EntityLinkAttachState state, in EntityLinkAttachConfig config,
-                in TrackBinding binding)
+            private void Execute()
             {
-                if (!state.IsAttached || state.ResolvedTarget == Entity.Null) return;
-
-                if (WorldSpace.TryGetComponent(binding.Value, out var origin) &&
-                    WorldSpace.TryGetComponent(state.ResolvedTarget, out var destination))
-                    RenderManifold(origin.Position, destination.Position, config.LinkKey);
             }
 
             private void RenderManifold(float3 origin, float3 destination, byte domain)
