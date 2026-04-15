@@ -166,13 +166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86e1ae0f97e488f835c2b3109ccb29d, type: 3}
   m_Name: PhysicsAngularPIDClip
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsAngularPIDClip
-  chaseTargetBlend: 0
-  localTargetRotationEuler: {x: 0, y: 1, z: 0}
+  trackingTarget: 1
+  targetMode: 1
+  targetRotationEuler: {x: 0, y: 0, z: 0}
   uniformAxes: 1
-  proportional: {x: 20, y: 20, z: 20}
-  integral: {x: 2, y: 2, z: 2}
-  derivative: {x: 8, y: 8, z: 8}
-  maxTorque: 300
+  proportional: {x: 4, y: 4, z: 4}
+  integral: {x: 0.5, y: 0.5, z: 0.5}
+  derivative: {x: 1, y: 1, z: 1}
+  maxTorque: 40
 --- !u!114 &-1683009330099079295
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,8 +295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb463547df244d9ad791fc3cb7f975a, type: 3}
   m_Name: PhysicsPIDClip
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsPIDClip
-  chaseTargetBlend: 1
-  localTargetOffset: {x: 0, y: 0, z: 0}
+  trackingTarget: 1
+  targetMode: 0
+  targetOffset: {x: 0, y: 0, z: 0}
   uniformAxes: 1
   proportional: {x: 15, y: 15, z: 15}
   integral: {x: 1, y: 1, z: 1}
