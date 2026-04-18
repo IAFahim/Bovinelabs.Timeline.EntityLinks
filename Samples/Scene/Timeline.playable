@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aba63af082349e5a32124c19e05b78c, type: 3}
   m_Name: PhysicsForceClip(Clone)
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsForceClip
-  LinearForce: {x: 10, y: 0, z: 0}
-  AngularForce: {x: 0, y: 0, z: 0}
+  linearForce: {x: 0, y: 0, z: 0}
+  angularForce: {x: 0, y: 0, z: 0}
   space: 0
 --- !u!114 &-6106530005745489516
 MonoBehaviour:
@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aba63af082349e5a32124c19e05b78c, type: 3}
   m_Name: PhysicsForceClip
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsForceClip
-  LinearForce: {x: 0, y: 0, z: 10}
-  AngularForce: {x: 0, y: 0, z: 0}
+  linearForce: {x: 0, y: 0, z: 0}
+  angularForce: {x: 0, y: 0, z: 0}
   space: 0
 --- !u!114 &-5361612831215185647
 MonoBehaviour:
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsAngularPIDClip
   trackingTarget: 1
   targetMode: 1
-  targetRotationEuler: {x: 0, y: 0, z: 0}
+  targetRotationEuler: {x: 0, y: 0, z: 30}
   uniformAxes: 1
   tuning:
     Proportional:
@@ -1187,8 +1187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aba63af082349e5a32124c19e05b78c, type: 3}
   m_Name: PhysicsForceClip(Clone)(Clone)
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsForceClip
-  LinearForce: {x: 0, y: 0, z: -10}
-  AngularForce: {x: 0, y: 0, z: 0}
+  linearForce: {x: 0, y: 0, z: 0}
+  angularForce: {x: 0, y: 0, z: 0}
   space: 0
 --- !u!114 &6637488014592112411
 MonoBehaviour:
@@ -1445,6 +1445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aba63af082349e5a32124c19e05b78c, type: 3}
   m_Name: PhysicsForceClip(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsForceClip
-  LinearForce: {x: -10, y: 0, z: 0}
-  AngularForce: {x: 0, y: 0, z: 0}
+  linearForce: {x: 0, y: 0, z: 0}
+  angularForce: {x: 0, y: 0, z: 0}
   space: 0
