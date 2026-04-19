@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aba63af082349e5a32124c19e05b78c, type: 3}
   m_Name: PhysicsForceClip(Clone)
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsForceClip
-  linearForce: {x: -10, y: 0, z: 0}
+  linearForce: {x: 10, y: 0, z: 0}
   angularForce: {x: 0, y: 0, z: 0}
   space: 0
 --- !u!114 &-6466188574983521507
@@ -1473,8 +1473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cd83fd3ac57cee8bbb6917743282b6, type: 3}
   m_Name: PhysicsDragClip
   m_EditorClassIdentifier: BovineLabs.Timeline.Physics.Authoring::BovineLabs.Timeline.Physics.Authoring.PhysicsDragClip
-  linearDrag: 5
-  angularDrag: 5
+  linearDrag: 1000
+  angularDrag: 1000
 --- !u!114 &8329585062532576727
 MonoBehaviour:
   m_ObjectHideFlags: 1
