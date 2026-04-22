@@ -17,22 +17,4 @@ namespace BovineLabs.Timeline.EntityLinks.Data
     {
         public BlobAssetReference<EntityLookupRegistry> Blob;
     }
-
-    public struct EntityLinkAttachRequestKey : IComponentData
-    {
-        public byte LinkKey;
-    }
-
-    public struct EntityLinkAttachRequestEntity : IComponentData
-    {
-        public Entity Entity;
-    }
-
-    public struct SetEntityLink : IComponentData, IEnableableComponent
-    {
-    }
-
-    public struct SetEntityLinkPrevious : IComponentData, IEnableableComponent
-    {
-    }
 }

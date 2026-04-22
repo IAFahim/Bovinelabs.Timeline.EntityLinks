@@ -14,24 +14,20 @@ namespace BovineLabs.Timeline.EntityLinks.Systems
     public partial struct EntityTargetAttachSystem : ISystem
     {
         private UnsafeComponentLookup<Targets> _entityTargetLookup;
-        private UnsafeComponentLookup<EntityEssenceRefComponent> _entityTargetRefComponentLookup;
 
         public void OnCreate(ref SystemState state)
         {
             _entityTargetLookup = state.GetUnsafeComponentLookup<Targets>();
-            _entityTargetRefComponentLookup = state.GetUnsafeComponentLookup<EntityEssenceRefComponent>(true);
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             _entityTargetLookup.Update(ref state);
-            _entityTargetRefComponentLookup.Update(ref state);
 
             state.Dependency = new ApplyEntityEssenceJob
             {
                 TargetLookup = _entityTargetLookup,
-                EntityTargetRefComponentLookup = _entityTargetRefComponentLookup
             }.Schedule(state.Dependency);
         }
     }
@@ -42,7 +38,6 @@ namespace BovineLabs.Timeline.EntityLinks.Systems
     internal partial struct ApplyEntityEssenceJob : IJobEntity
     {
         public UnsafeComponentLookup<Targets> TargetLookup;
-        [ReadOnly] public UnsafeComponentLookup<EntityEssenceRefComponent> EntityTargetRefComponentLookup;
 
         private void Execute(in TrackBinding binding)
         {
@@ -61,7 +56,7 @@ namespace BovineLabs.Timeline.EntityLinks.Systems
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Entity ResolveTargetEntity(in Targets targets)
         {
-            return EntityTargetRefComponentLookup[targets.Target].EssenceEntity;
+            return Entity.Null;
         }
     }
 }

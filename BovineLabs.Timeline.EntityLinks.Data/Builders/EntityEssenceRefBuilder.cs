@@ -16,14 +16,5 @@ namespace BovineLabs.Timeline.EntityLinks.Data.Builders
             essenceEntity = entity;
             return this;
         }
-
-        public void ApplyTo<T>(ref T builder)
-            where T : struct, IEntityCommands
-        {
-            builder.AddComponent(new EntityEssenceRefComponent
-            {
-                EssenceEntity = essenceEntity
-            });
-        }
     }
 }
