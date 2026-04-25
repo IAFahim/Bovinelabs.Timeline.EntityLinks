@@ -12,23 +12,25 @@ namespace BovineLabs.Timeline.EntityLinks.Systems
     [UpdateInGroup(typeof(TimelineComponentAnimationGroup))]
     public partial struct EntityTargetAttachSystem : ISystem
     {
-        private UnsafeComponentLookup<Targets> _entityTargetLookup;
-
         public void OnCreate(ref SystemState state)
         {
-            _entityTargetLookup = state.GetUnsafeComponentLookup<Targets>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            _entityTargetLookup.Update(ref state);
+            var ecb = new EntityCommandBuffer(Allocator.TempJob);
 
             state.Dependency = new ApplyEntityEssenceJob
             {
-                TargetLookup = _entityTargetLookup,
+                TargetsLookup = state.GetUnsafeComponentLookup<Targets>(true),
                 EssenceRefLookup = SystemAPI.GetComponentLookup<EntityEssenceRef>(true),
+                ECB = ecb
             }.Schedule(state.Dependency);
+
+            state.Dependency.Complete();
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
         }
     }
 
@@ -37,8 +39,9 @@ namespace BovineLabs.Timeline.EntityLinks.Systems
     [WithDisabled(typeof(ClipActivePrevious))]
     internal partial struct ApplyEntityEssenceJob : IJobEntity
     {
-        public UnsafeComponentLookup<Targets> TargetLookup;
+        [ReadOnly] public UnsafeComponentLookup<Targets> TargetsLookup;
         [ReadOnly] public ComponentLookup<EntityEssenceRef> EssenceRefLookup;
+        public EntityCommandBuffer ECB;
 
         private void Execute(in TrackBinding binding)
         {
@@ -46,9 +49,10 @@ namespace BovineLabs.Timeline.EntityLinks.Systems
             if (!EssenceRefLookup.TryGetComponent(bindingEntity, out var essenceRef)) return;
             if (essenceRef.Value == Entity.Null) return;
 
-            var targets = TargetLookup[bindingEntity];
+            if (!TargetsLookup.HasComponent(bindingEntity)) return;
+            var targets = TargetsLookup[bindingEntity];
             targets.Target = essenceRef.Value;
-            TargetLookup[bindingEntity] = targets;
+            ECB.SetComponent(bindingEntity, targets);
         }
     }
 }
