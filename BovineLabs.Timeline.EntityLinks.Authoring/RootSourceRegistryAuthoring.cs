@@ -48,6 +48,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             {
                 if (authoring.transform.root != authoring.transform) return;
 
+                var rootEntity = GetEntity(TransformUsageFlags.None);
                 var validLinks = new List<(byte tag, SourceAuthoring src)>();
                 var tagsSet = new HashSet<byte>();
 
@@ -67,19 +68,19 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
                     DependsOn(tagAuth);
                 }
 
-                if (validLinks.Count == 0) return;
-
-                var entity = GetEntity(TransformUsageFlags.None);
-                var buffer = AddBuffer<EntityLinkElement>(entity);
-                buffer.ResizeUninitialized(validLinks.Count);
-
-                for (var i = 0; i < validLinks.Count; i++)
+                if (validLinks.Count > 0)
                 {
-                    buffer[i] = new EntityLinkElement
+                    var buffer = AddBuffer<EntityLinkElement>(rootEntity);
+                    buffer.ResizeUninitialized(validLinks.Count);
+
+                    for (var i = 0; i < validLinks.Count; i++)
                     {
-                        Tag = validLinks[i].tag,
-                        Value = GetEntity(validLinks[i].src, TransformUsageFlags.None)
-                    };
+                        buffer[i] = new EntityLinkElement
+                        {
+                            Tag = validLinks[i].tag,
+                            Value = GetEntity(validLinks[i].src, TransformUsageFlags.None)
+                        };
+                    }
                 }
             }
         }

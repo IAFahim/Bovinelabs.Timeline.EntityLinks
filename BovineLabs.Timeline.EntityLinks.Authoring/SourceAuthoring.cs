@@ -1,17 +1,25 @@
-using BovineLabs.Core.Authoring;
+using BovineLabs.Timeline.EntityLinks.Data;
+using Unity.Entities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     public class SourceAuthoring : MonoBehaviour
     {
-        [FormerlySerializedAs("entityLinkTagSchema")] public SourceSchema sourceSchema;
+        public SourceSchema sourceSchema;
 
-        private void OnValidate()
+        public class Baker : Baker<SourceAuthoring>
         {
-            if (!transform.gameObject.TryGetComponent(out TransformAuthoring transformAuthoring))
-                transform.gameObject.AddComponent<TransformAuthoring>();
+            public override void Bake(SourceAuthoring authoring)
+            {
+                if (authoring.sourceSchema == null) return;
+                var entity = GetEntity(TransformUsageFlags.None);
+                AddComponent(entity,
+                    new SourceData
+                    {
+                        Root = GetEntity(authoring.transform.root, TransformUsageFlags.None)
+                    });
+            }
         }
     }
 }
