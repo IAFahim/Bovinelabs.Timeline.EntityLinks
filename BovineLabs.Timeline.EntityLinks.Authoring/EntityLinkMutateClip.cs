@@ -9,15 +9,13 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     public sealed class EntityLinkMutateClip : DOTSClip, ITimelineClipAsset
     {
-        [Header("Operation")]
-        public EntityLinkMutateMode mode = EntityLinkMutateMode.Assign;
+        [Header("Operation")] public EntityLinkMutateMode mode = EntityLinkMutateMode.Assign;
 
-        [Header("Link")]
-        public EntityLinkSchema link;
+        [Header("Link")] public EntityLinkSchema link;
+
         public Target readRootFrom = Target.Source;
 
-        [Header("Assign / Swap Target")]
-        public Target newTarget = Target.Target;
+        [Header("Assign / Swap Target")] public Target newTarget = Target.Target;
 
         [Header("Swap")]
         [Tooltip("Second link key for swap operations. The entity at this key is swapped with the entity at Link.")]
@@ -28,21 +26,21 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 
         public override void Bake(Entity clipEntity, BakingContext context)
         {
-            if (!EntityLinkAuthoringUtility.TryGetKey(this.link, out ushort key))
+            if (!EntityLinkAuthoringUtility.TryGetKey(link, out var key))
             {
-                Debug.LogError($"{nameof(EntityLinkMutateClip)} '{this.name}' missing link schema.");
+                Debug.LogError($"{nameof(EntityLinkMutateClip)} '{name}' missing link schema.");
                 return;
             }
 
-            EntityLinkAuthoringUtility.TryGetKey(this.swapLink, out ushort swapKey);
+            EntityLinkAuthoringUtility.TryGetKey(swapLink, out var swapKey);
 
             context.Baker.AddComponent(clipEntity, new EntityLinkMutate
             {
-                Mode = this.mode,
-                ReadRootFrom = this.readRootFrom,
+                Mode = mode,
+                ReadRootFrom = readRootFrom,
                 LinkKey = key,
-                NewTarget = this.newTarget,
-                SwapKey = swapKey,
+                NewTarget = newTarget,
+                SwapKey = swapKey
             });
 
             base.Bake(clipEntity, context);

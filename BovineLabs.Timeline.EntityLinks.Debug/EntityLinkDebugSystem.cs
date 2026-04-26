@@ -55,14 +55,10 @@ namespace BovineLabs.Timeline.EntityLinks.Debug
                 var origin = bindingLtw.Position;
 
                 if (targets.Target != Entity.Null && WorldSpace.TryGetComponent(targets.Target, out var targetLtw))
-                {
                     RenderManifold(origin, targetLtw.Position, 0);
-                }
 
                 if (targets.Source != Entity.Null && WorldSpace.TryGetComponent(targets.Source, out var sourceLtw))
-                {
                     RenderManifold(origin, sourceLtw.Position, 1);
-                }
             }
 
             private void RenderManifold(float3 origin, float3 destination, byte domain)

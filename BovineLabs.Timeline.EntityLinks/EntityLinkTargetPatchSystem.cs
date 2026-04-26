@@ -43,81 +43,73 @@ namespace BovineLabs.Timeline.EntityLinks
 
             public EntityCommandBuffer.ParallelWriter ECB;
 
-            private void Execute(Entity clipEntity, [EntityIndexInQuery] int sortKey, in TrackBinding binding, in EntityLinkTargetPatch patch)
+            private void Execute(Entity clipEntity, [EntityIndexInQuery] int sortKey, in TrackBinding binding,
+                in EntityLinkTargetPatch patch)
             {
                 var bindingEntity = binding.Value;
-                if (bindingEntity == Entity.Null)
-                {
-                    return;
-                }
+                if (bindingEntity == Entity.Null) return;
 
-                if (!this.TargetsLookup.TryGetComponent(bindingEntity, out var targets))
-                {
-                    return;
-                }
+                if (!TargetsLookup.TryGetComponent(bindingEntity, out var targets)) return;
 
                 var resolved = EntityLinkResolver.ResolveOrFallback(
                     bindingEntity,
                     targets,
                     patch,
-                    this.TargetsCustoms,
-                    this.Sources,
-                    this.Links);
+                    TargetsCustoms,
+                    Sources,
+                    Links);
 
-                if (resolved == Entity.Null)
-                {
-                    return;
-                }
+                if (resolved == Entity.Null) return;
 
                 switch (patch.WriteTo)
                 {
                     case Target.Owner:
                         targets.Owner = resolved;
-                        this.ECB.SetComponent(sortKey, bindingEntity, targets);
+                        ECB.SetComponent(sortKey, bindingEntity, targets);
                         break;
 
                     case Target.Source:
                         targets.Source = resolved;
-                        this.ECB.SetComponent(sortKey, bindingEntity, targets);
+                        ECB.SetComponent(sortKey, bindingEntity, targets);
                         break;
 
                     case Target.Target:
                         targets.Target = resolved;
-                        this.ECB.SetComponent(sortKey, bindingEntity, targets);
+                        ECB.SetComponent(sortKey, bindingEntity, targets);
                         break;
 
                     case Target.Custom0:
-                        this.WriteCustom0(sortKey, bindingEntity, resolved);
+                        WriteCustom0(sortKey, bindingEntity, resolved);
                         break;
 
                     case Target.Custom1:
-                        this.WriteCustom1(sortKey, bindingEntity, resolved);
+                        WriteCustom1(sortKey, bindingEntity, resolved);
                         break;
                 }
             }
 
             private void WriteCustom0(int sortKey, Entity entity, Entity target)
             {
-                if (this.TargetsCustoms.TryGetComponent(entity, out var custom))
+                if (TargetsCustoms.TryGetComponent(entity, out var custom))
                 {
                     custom.Target0 = target;
-                    this.ECB.SetComponent(sortKey, entity, custom);
+                    ECB.SetComponent(sortKey, entity, custom);
                     return;
                 }
 
-                this.ECB.AddComponent(sortKey, entity, new TargetsCustom { Target0 = target });
+                ECB.AddComponent(sortKey, entity, new TargetsCustom { Target0 = target });
             }
 
             private void WriteCustom1(int sortKey, Entity entity, Entity target)
             {
-                if (this.TargetsCustoms.TryGetComponent(entity, out var custom))
+                if (TargetsCustoms.TryGetComponent(entity, out var custom))
                 {
                     custom.Target1 = target;
-                    this.ECB.SetComponent(sortKey, entity, custom);
+                    ECB.SetComponent(sortKey, entity, custom);
                     return;
                 }
 
-                this.ECB.AddComponent(sortKey, entity, new TargetsCustom { Target1 = target });
+                ECB.AddComponent(sortKey, entity, new TargetsCustom { Target1 = target });
             }
         }
     }

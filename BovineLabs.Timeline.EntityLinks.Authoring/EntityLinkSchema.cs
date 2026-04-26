@@ -5,18 +5,16 @@ using UnityEngine;
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     [AutoRef(nameof(EntityLinkSettings), "schemas", nameof(EntityLinkSchema), "Schemas/EntityLinks/")]
-    [CreateAssetMenu(menuName = "BovineLabs/Timeline/Entity Links/Schema")]
+    [CreateAssetMenu(menuName = "BovineLabs/Entity Links/Schema")]
     public sealed class EntityLinkSchema : ScriptableObject, IUID
     {
-        [SerializeField]
-        [InspectorReadOnly]
-        private ushort id;
+        [SerializeField] [InspectorReadOnly] private ushort id;
 
-        public ushort Id => this.id;
+        public ushort Id => id;
 
         int IUID.ID
         {
-            get => this.id;
+            get => id;
             set
             {
                 if (value is < 0 or > ushort.MaxValue)
@@ -25,7 +23,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
                     return;
                 }
 
-                this.id = (ushort)value;
+                id = (ushort)value;
             }
         }
 
@@ -33,7 +31,5 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
         {
             return schema == null ? (ushort)0 : schema.id;
         }
-
-
     }
 }

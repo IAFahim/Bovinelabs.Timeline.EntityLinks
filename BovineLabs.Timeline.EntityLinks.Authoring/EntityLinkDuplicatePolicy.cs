@@ -4,6 +4,6 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
     {
         Error = 0,
         FirstWins = 1,
-        LastWins = 2,
+        LastWins = 2
     }
 }

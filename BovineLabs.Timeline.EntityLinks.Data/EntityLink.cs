@@ -11,7 +11,7 @@ namespace BovineLabs.Timeline.EntityLinks.Data
 
         public int CompareTo(EntityLink other)
         {
-            return this.Key.CompareTo(other.Key);
+            return Key.CompareTo(other.Key);
         }
     }
 }

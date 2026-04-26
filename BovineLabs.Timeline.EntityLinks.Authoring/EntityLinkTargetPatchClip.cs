@@ -19,24 +19,24 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 
         public override void Bake(Entity clipEntity, BakingContext context)
         {
-            if (!EntityLinkAuthoringUtility.TryGetKey(this.Link, out ushort key))
+            if (!EntityLinkAuthoringUtility.TryGetKey(Link, out var key))
             {
-                Debug.LogError($"{nameof(EntityLinkTargetPatchClip)} '{this.name}' missing link schema.");
+                Debug.LogError($"{nameof(EntityLinkTargetPatchClip)} '{name}' missing link schema.");
                 return;
             }
 
-            if (this.WriteTo is Target.None or Target.Self)
+            if (WriteTo is Target.None or Target.Self)
             {
-                Debug.LogError($"{nameof(EntityLinkTargetPatchClip)} '{this.name}' cannot write to '{this.WriteTo}'.");
+                Debug.LogError($"{nameof(EntityLinkTargetPatchClip)} '{name}' cannot write to '{WriteTo}'.");
                 return;
             }
 
             context.Baker.AddComponent(clipEntity, new EntityLinkTargetPatch
             {
-                ReadRootFrom = this.ReadRootFrom,
+                ReadRootFrom = ReadRootFrom,
                 LinkKey = key,
-                WriteTo = this.WriteTo,
-                Fallback = this.Fallback
+                WriteTo = WriteTo,
+                Fallback = Fallback
             });
 
             base.Bake(clipEntity, context);

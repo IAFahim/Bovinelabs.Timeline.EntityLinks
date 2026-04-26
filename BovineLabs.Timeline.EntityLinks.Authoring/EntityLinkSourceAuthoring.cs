@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
+using UnityEditor;
 using UnityEngine;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring
@@ -17,7 +18,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
         private void OnValidate()
         {
 #if UNITY_EDITOR
-            if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
                 return;
 
             if (Root == null)
@@ -27,59 +28,37 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             }
 #endif
         }
-        
+
         public bool TryGetRoot(out EntityLinkRootAuthoring root)
         {
-            root = this.Root != null ? this.Root : this.GetComponentInParent<EntityLinkRootAuthoring>(true);
+            root = Root != null ? Root : GetComponentInParent<EntityLinkRootAuthoring>(true);
             return root != null;
         }
 
         public bool HasSchema(EntityLinkSchema schema)
         {
-            if (schema == null)
-            {
-                return false;
-            }
+            if (schema == null) return false;
 
-            if (this.Schema == schema)
-            {
-                return true;
-            }
+            if (Schema == schema) return true;
 
-            if (this.Aliases == null)
-            {
-                return false;
-            }
+            if (Aliases == null) return false;
 
-            foreach (var alias in this.Aliases)
-            {
+            foreach (var alias in Aliases)
                 if (alias == schema)
-                {
                     return true;
-                }
-            }
 
             return false;
         }
 
         internal void AddSchemas(List<EntityLinkSchema> schemas)
         {
-            if (this.Schema != null)
-            {
-                schemas.Add(this.Schema);
-            }
+            if (Schema != null) schemas.Add(Schema);
 
-            if (this.Aliases == null)
-            {
-                return;
-            }
+            if (Aliases == null) return;
 
-            foreach (var alias in this.Aliases)
+            foreach (var alias in Aliases)
             {
-                if (alias == null)
-                {
-                    continue;
-                }
+                if (alias == null) continue;
 
                 schemas.Add(alias);
             }
@@ -92,15 +71,16 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             {
                 if (!authoring.TryGetRoot(out var root))
                 {
-                    Debug.LogError($"{nameof(EntityLinkSourceAuthoring)} on '{authoring.name}' could not find {nameof(EntityLinkRootAuthoring)}.");
+                    Debug.LogError(
+                        $"{nameof(EntityLinkSourceAuthoring)} on '{authoring.name}' could not find {nameof(EntityLinkRootAuthoring)}.");
                     return;
                 }
 
-                this.DependsOn(root);
+                DependsOn(root);
 
-                this.AddComponent(this.GetEntity(TransformUsageFlags.None), new EntityLinkSource
+                AddComponent(GetEntity(TransformUsageFlags.None), new EntityLinkSource
                 {
-                    Root = this.GetEntity(root, TransformUsageFlags.None)
+                    Root = GetEntity(root, TransformUsageFlags.None)
                 });
             }
         }

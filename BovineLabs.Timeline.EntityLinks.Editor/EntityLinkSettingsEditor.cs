@@ -13,8 +13,8 @@ namespace BovineLabs.Timeline.EntityLinks.Editor
         {
             return property.name switch
             {
-                "schemas" => new AssetCreator<EntityLinkSchema>(this.serializedObject, property).Element,
-                _ => base.CreateElement(property),
+                "schemas" => new AssetCreator<EntityLinkSchema>(serializedObject, property).Element,
+                _ => base.CreateElement(property)
             };
         }
     }

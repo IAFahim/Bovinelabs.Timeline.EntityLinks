@@ -27,13 +27,13 @@ namespace BovineLabs.Timeline.EntityLinks
                 TargetsLookup = SystemAPI.GetComponentLookup<Targets>(true),
                 TargetsCustoms = SystemAPI.GetComponentLookup<TargetsCustom>(true),
                 Sources = SystemAPI.GetComponentLookup<EntityLinkSource>(true),
-                Links = state.GetUnsafeBufferLookup<EntityLink>(),
+                Links = state.GetUnsafeBufferLookup<EntityLink>()
             }.ScheduleParallel(state.Dependency);
         }
 
         /// <summary>
-        /// Fires once per clip activation.
-        /// WithAll(ClipActive) + WithDisabled(ClipActivePrevious) = "just became active this frame".
+        ///     Fires once per clip activation.
+        ///     WithAll(ClipActive) + WithDisabled(ClipActivePrevious) = "just became active this frame".
         /// </summary>
         [BurstCompile]
         [WithAll(typeof(ClipActive))]
@@ -44,8 +44,7 @@ namespace BovineLabs.Timeline.EntityLinks
             [ReadOnly] public ComponentLookup<TargetsCustom> TargetsCustoms;
             [ReadOnly] public ComponentLookup<EntityLinkSource> Sources;
 
-            [NativeDisableParallelForRestriction]
-            public UnsafeBufferLookup<EntityLink> Links;
+            [NativeDisableParallelForRestriction] public UnsafeBufferLookup<EntityLink> Links;
 
             private void Execute(Entity clipEntity, in TrackBinding binding, in EntityLinkMutate mutate)
             {
@@ -84,10 +83,11 @@ namespace BovineLabs.Timeline.EntityLinks
             }
 
             /// <summary>
-            /// Assign a new target entity to the given key.
-            /// If the key exists, replace its target. Otherwise insert sorted.
+            ///     Assign a new target entity to the given key.
+            ///     If the key exists, replace its target. Otherwise insert sorted.
             /// </summary>
-            private void Assign(UnsafeDynamicBuffer<EntityLink> buffer, ushort key, in Targets targets, Target newTargetMode, Entity bindingEntity)
+            private void Assign(UnsafeDynamicBuffer<EntityLink> buffer, ushort key, in Targets targets,
+                Target newTargetMode, Entity bindingEntity)
             {
                 var newEntity = targets.Get(newTargetMode, bindingEntity, TargetsCustoms);
 
@@ -115,8 +115,8 @@ namespace BovineLabs.Timeline.EntityLinks
             }
 
             /// <summary>
-            /// Swap the targets of two link keys within the same buffer.
-            /// Used for inventory slot swaps, hand ↔ backpack, etc.
+            ///     Swap the targets of two link keys within the same buffer.
+            ///     Used for inventory slot swaps, hand ↔ backpack, etc.
             /// </summary>
             private void Swap(UnsafeDynamicBuffer<EntityLink> buffer, ushort keyA, ushort keyB)
             {
@@ -140,7 +140,7 @@ namespace BovineLabs.Timeline.EntityLinks
             }
 
             /// <summary>
-            /// Remove a link entry by key.
+            ///     Remove a link entry by key.
             /// </summary>
             private void Remove(UnsafeDynamicBuffer<EntityLink> buffer, ushort key)
             {

@@ -10,7 +10,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
     [TrackClipType(typeof(EntityLinkMutateClip))]
     [TrackColor(0.85f, 0.55f, 0.2f)]
     [TrackBindingType(typeof(TargetsAuthoring))]
-    [DisplayName("BovineLabs/Timeline/Entity Links/Link Mutate")]
+    [DisplayName("BovineLabs/Entity Links/Link Mutate")]
     public sealed class EntityLinkMutateTrack : DOTSTrack
     {
     }

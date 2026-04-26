@@ -7,11 +7,11 @@ using UnityEngine.Timeline;
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
     [Serializable]
-    [TrackClipType(typeof(EntityLinkTargetPatchClip))]
-    [TrackColor(0.2f, 0.8f, 0.8f)]
+    [TrackClipType(typeof(EntityLinkParentClip))]
+    [TrackColor(0.8f, 0.2f, 0.8f)]
     [TrackBindingType(typeof(TargetsAuthoring))]
-    [DisplayName("BovineLabs/Entity Links/Target Patch")]
-    public sealed class EntityLinkTargetPatchTrack : DOTSTrack
+    [DisplayName("BovineLabs/Entity Links/Parent")]
+    public sealed class EntityLinkParentTrack : DOTSTrack
     {
     }
 }

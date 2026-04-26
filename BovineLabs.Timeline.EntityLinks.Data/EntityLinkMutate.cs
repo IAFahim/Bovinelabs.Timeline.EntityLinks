@@ -7,7 +7,7 @@ namespace BovineLabs.Timeline.EntityLinks.Data
     {
         Assign = 0,
         Swap = 1,
-        Remove = 2,
+        Remove = 2
     }
 
     public struct EntityLinkMutate : IComponentData

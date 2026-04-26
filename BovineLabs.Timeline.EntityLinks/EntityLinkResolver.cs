@@ -28,10 +28,7 @@ namespace BovineLabs.Timeline.EntityLinks
         {
             result = Entity.Null;
 
-            if (root == Entity.Null || key == 0 || !links.TryGetBuffer(root, out var buffer))
-            {
-                return false;
-            }
+            if (root == Entity.Null || key == 0 || !links.TryGetBuffer(root, out var buffer)) return false;
 
             for (var i = 0; i < buffer.Length; i++)
             {
@@ -42,10 +39,7 @@ namespace BovineLabs.Timeline.EntityLinks
                     return result != Entity.Null;
                 }
 
-                if (link.Key > key)
-                {
-                    break;
-                }
+                if (link.Key > key) break;
             }
 
             return false;
@@ -98,10 +92,8 @@ namespace BovineLabs.Timeline.EntityLinks
             in ComponentLookup<EntityLinkSource> sources,
             in BufferLookup<EntityLink> links)
         {
-            if (TryResolve(self, targets, patch.ReadRootFrom, patch.LinkKey, targetsCustoms, sources, links, out var linked))
-            {
-                return linked;
-            }
+            if (TryResolve(self, targets, patch.ReadRootFrom, patch.LinkKey, targetsCustoms, sources, links,
+                    out var linked)) return linked;
 
             return targets.Get(patch.Fallback, self, targetsCustoms);
         }
