@@ -1,11 +1,12 @@
 using BovineLabs.Core.Authoring;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
-    public class EntityTagAuthoring : MonoBehaviour
+    public class SourceAuthoring : MonoBehaviour
     {
-        public EntityLinkTagSchema entityLinkTagSchema;
+        [FormerlySerializedAs("entityLinkTagSchema")] public SourceSchema sourceSchema;
 
         private void OnValidate()
         {

@@ -6,14 +6,14 @@ using UnityEngine.UIElements;
 
 namespace BovineLabs.Timeline.EntityLinks.Editor
 {
-    [CustomEditor(typeof(EntityLinkSettings))]
+    [CustomEditor(typeof(SourceSettings))]
     public class EntityLinkSettingsEditor : ElementEditor
     {
         protected override VisualElement CreateElement(SerializedProperty property)
         {
             return property.name switch
             {
-                "entityLinkTagSchemas" => new AssetCreator<EntityLinkTagSchema>(this.serializedObject, property).Element,
+                "entityLinkTagSchemas" => new AssetCreator<SourceSchema>(this.serializedObject, property).Element,
                 _ => base.CreateElement(property),
             };
         }

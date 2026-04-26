@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
-    [AutoRef(nameof(EntityLinkSettings), "entityLinkTagSchemas", nameof(EntityLinkTagSchema), "Schemas/EntityLinks")]
+    [AutoRef(nameof(SourceSettings), "entityLinkTagSchemas", nameof(SourceSchema), "Schemas/EntityLinks")]
     [CreateAssetMenu(menuName = "BovineLabs/EntityLinks/Tag")]
-    public class EntityLinkTagSchema : ScriptableObject, IUID
+    public class SourceSchema : ScriptableObject, IUID
     {
         [SerializeField]
         [InspectorReadOnly]
@@ -29,7 +29,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             }
         }
 
-        public static implicit operator byte(EntityLinkTagSchema schema)
+        public static implicit operator byte(SourceSchema schema)
         {
             return schema == null ? (byte)0 : schema.id;
         }

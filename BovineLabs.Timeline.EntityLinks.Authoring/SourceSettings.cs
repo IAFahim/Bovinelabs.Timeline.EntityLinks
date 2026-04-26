@@ -6,19 +6,19 @@ using UnityEngine;
 
 namespace BovineLabs.Timeline.EntityLinks.Authoring
 {
-    [SettingsGroup("EntityLinks")]
-    public class EntityLinkSettings : KSettingsBase<EntityLinkSettings, byte>
+    [SettingsGroup("Source")]
+    public class SourceSettings : KSettingsBase<SourceSettings, byte>
     {
         [SerializeField] 
-        private EntityLinkTagSchema[] entityLinkTagSchemas = Array.Empty<EntityLinkTagSchema>();
+        private SourceSchema[] sourceSchemas = Array.Empty<SourceSchema>();
         
-        public IReadOnlyList<EntityLinkTagSchema> EntityLinkTagSchemas => this.entityLinkTagSchemas;
+        public IReadOnlyList<SourceSchema> SourceSchemas => this.sourceSchemas;
 
         public override IEnumerable<NameValue<byte>> Keys
         {
             get
             {
-                foreach (var schema in this.entityLinkTagSchemas)
+                foreach (var schema in this.sourceSchemas)
                 {
                     if (schema == null) continue;
                     yield return new NameValue<byte>(schema.name, schema.Id);
