@@ -82,8 +82,10 @@ namespace BovineLabs.Timeline.EntityLinks
                 if (rootCandidate == Entity.Null)
                     return;
 
-                if (!EntityLinkResolver.TryResolve(rootCandidate, config.ParentLinkKey, Sources, Links,
-                        out var resolvedParent))
+                if (!EntityLinkResolver.TryResolveRoot(rootCandidate, Sources, out var root))
+                    return;
+
+                if (!EntityLinkResolver.TryResolveFromRoot(root, config.ParentLinkKey, Links, out var resolvedParent))
                     return;
 
                 // 3. Record previous state for restoration on clip end

@@ -24,7 +24,7 @@ namespace BovineLabs.Timeline.EntityLinks
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryResolve(Entity root, ushort key, in BufferLookup<EntityLink> links, out Entity result)
+        public static bool TryResolveFromRoot(Entity root, ushort key, in BufferLookup<EntityLink> links, out Entity result)
         {
             result = Entity.Null;
 
@@ -59,7 +59,7 @@ namespace BovineLabs.Timeline.EntityLinks
                 return false;
             }
 
-            return TryResolve(root, key, links, out result);
+            return TryResolveFromRoot(root, key, links, out result);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

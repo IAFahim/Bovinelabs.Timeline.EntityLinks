@@ -60,6 +60,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             {
                 var sources = root.GetComponentsInChildren<EntityLinkSourceAuthoring>(true);
                 var schemas = new List<EntityLinkSchema>(4);
+                var seenSchemas = new HashSet<EntityLinkSchema>();
 
                 foreach (var source in sources)
                 {
@@ -74,7 +75,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
                     {
                         if (!EntityLinkAuthoringUtility.TryGetKey(schema, out var key)) continue;
 
-                        DependsOn(schema);
+                        if (seenSchemas.Add(schema)) DependsOn(schema);
                         AddLink(root, links, key, source, schema.name, LinkOrigin.Auto);
                     }
                 }
@@ -83,6 +84,8 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             private void CollectManualLinks(EntityLinkRootAuthoring root,
                 Dictionary<ushort, EntityLinkAuthoringUtility.Entry> links)
             {
+                var seenSchemas = new HashSet<EntityLinkSchema>();
+
                 foreach (var link in root.Links)
                 {
                     if (link == null) continue;
@@ -95,7 +98,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
                         continue;
                     }
 
-                    DependsOn(link.Schema);
+                    if (seenSchemas.Add(link.Schema)) DependsOn(link.Schema);
                     DependsOn(target);
                     AddLink(root, links, key, target, link.Schema.name, LinkOrigin.Manual);
                 }
