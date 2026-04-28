@@ -7,6 +7,7 @@ using BovineLabs.Reaction.Data.Core;
 using BovineLabs.Timeline.Data;
 using Unity.Burst;
 using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -61,7 +62,7 @@ namespace BovineLabs.Timeline.EntityLinks.Debug
                     RenderManifold(origin, sourceLtw.Position, 1);
             }
 
-            private void RenderManifold(float3 origin, float3 destination, byte domain)
+            private unsafe void RenderManifold(float3 origin, float3 destination, byte domain)
             {
                 var hue = domain * 0.618033988749895f % 1.0f;
                 var tint = Color.HSVToRGB(hue, 0.8f, 0.9f);
@@ -70,7 +71,15 @@ namespace BovineLabs.Timeline.EntityLinks.Debug
                 apex.y += span * 0.2f;
 
                 const int resolution = 16;
-                var path = new NativeList<float3>(resolution * 2, Allocator.Temp);
+                const int points = resolution * 2;
+                var pathData = stackalloc float3[points];
+                var path = NativeArrayUnsafeUtility.ConvertExistingDataToNativeArray<float3>(pathData, points,
+                    Allocator.None);
+#if ENABLE_UNITY_COLLECTIONS_CHECKS
+                NativeArrayUnsafeUtility.SetAtomicSafetyHandle(ref path, AtomicSafetyHandle.GetTempMemoryHandle());
+#endif
+
+                var pathLength = 0;
                 var node = origin;
 
                 for (var step = 1; step <= resolution; step++)
@@ -78,15 +87,13 @@ namespace BovineLabs.Timeline.EntityLinks.Debug
                     var ratio = step / (float)resolution;
                     var vertex = math.lerp(math.lerp(origin, apex, ratio), math.lerp(apex, destination, ratio), ratio);
 
-                    path.Add(node);
-                    path.Add(vertex);
+                    path[pathLength++] = node;
+                    path[pathLength++] = vertex;
                     node = vertex;
                 }
 
-                Renderer.Lines(path.AsArray(), tint);
+                Renderer.Lines(path.GetSubArray(0, pathLength), tint);
                 Renderer.Point(destination, 0.05f, tint);
-
-                path.Dispose();
             }
         }
     }
