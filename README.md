@@ -1,1 +1,4 @@
-Use this file to describe your package's features.
+# BovineLabs.Timeline.EntityLinks
+
+Standardized high-performance entity linking for Timelines. 
+Uses BovineLabs.Core DynamicHashMap for O(1) resolution.

@@ -1,17 +1,13 @@
-using System;
+using BovineLabs.Core.Iterators;
+using BovineLabs.Core.ObjectManagement;
 using Unity.Entities;
 
 namespace BovineLabs.Timeline.EntityLinks.Data
 {
-    [InternalBufferCapacity(0)]
-    public struct EntityLink : IBufferElementData, IComparable<EntityLink>
+    public struct EntityLink : IDynamicHashMap<ObjectId, Entity>
     {
-        public ushort Key;
-        public Entity Target;
+        private byte value;
 
-        public int CompareTo(EntityLink other)
-        {
-            return Key.CompareTo(other.Key);
-        }
+        public byte Value => this.value;
     }
 }

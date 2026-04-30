@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using BovineLabs.Core.Iterators;
+using BovineLabs.Core.ObjectManagement;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine;
@@ -56,12 +58,13 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
                 entries.Sort((a, b) => a.Key.CompareTo(b.Key));
 
                 var buffer = AddBuffer<EntityLink>(rootEntity);
+                buffer.InitializeHashMap<EntityLink, ObjectId, Entity>();
+                var map = buffer.AsHashMap<EntityLink, ObjectId, Entity>();
+
                 foreach (var entry in entries)
-                    buffer.Add(new EntityLink
-                    {
-                        Key = entry.Key,
-                        Target = GetEntity(entry.Target, TransformUsageFlags.None)
-                    });
+                {
+                    map.Add(new ObjectId(entry.Key), GetEntity(entry.Target, TransformUsageFlags.None));
+                }
             }
 
             private void AddLink(
