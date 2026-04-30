@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using BovineLabs.Core.Iterators;
-using BovineLabs.Core.ObjectManagement;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
 using UnityEngine;
@@ -19,7 +18,6 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
             if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
                 return;
 
-            // Rebuild from children — schemas live on each source, no extra data to preserve.
             Links = GetComponentsInChildren<EntityLinkSourceAuthoring>(true);
         }
 #endif
@@ -57,13 +55,17 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
                 var entries = new List<EntityLinkAuthoringUtility.Entry>(links.Values);
                 entries.Sort((a, b) => a.Key.CompareTo(b.Key));
 
+                var entryBuffer = AddBuffer<EntityLinkEntry>(rootEntity);
                 var buffer = AddBuffer<EntityLink>(rootEntity);
-                buffer.InitializeHashMap<EntityLink, ObjectId, Entity>();
-                var map = buffer.AsHashMap<EntityLink, ObjectId, Entity>();
+                buffer.InitializeHashMap<EntityLink, ushort, Entity>();
 
                 foreach (var entry in entries)
                 {
-                    map.Add(new ObjectId(entry.Key), GetEntity(entry.Target, TransformUsageFlags.None));
+                    entryBuffer.Add(new EntityLinkEntry
+                    {
+                        Key = entry.Key,
+                        Target = GetEntity(entry.Target, TransformUsageFlags.None),
+                    });
                 }
             }
 
@@ -82,8 +84,7 @@ namespace BovineLabs.Timeline.EntityLinks.Authoring
 
                 if (targetRoot != root)
                 {
-                    Debug.LogError(
-                        $"EntityLink '{schemaName}' on '{root.name}' targets '{target.name}' under different root '{targetRoot.name}'.");
+                    Debug.LogError($"EntityLink '{schemaName}' on '{root.name}' targets '{target.name}' under different root '{targetRoot.name}'.");
                     return;
                 }
 

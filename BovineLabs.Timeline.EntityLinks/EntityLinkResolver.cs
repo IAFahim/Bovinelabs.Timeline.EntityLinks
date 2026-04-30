@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using BovineLabs.Core.Iterators;
-using BovineLabs.Core.ObjectManagement;
 using BovineLabs.Reaction.Data.Core;
 using BovineLabs.Timeline.EntityLinks.Data;
 using Unity.Entities;
@@ -26,12 +25,11 @@ namespace BovineLabs.Timeline.EntityLinks
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryResolveFromRoot(Entity root, ushort key, in BufferLookup<EntityLink> links,
-            out Entity result)
+        public static bool TryResolveFromRoot(Entity root, ushort key, in BufferLookup<EntityLink> links, out Entity result)
         {
             if (root != Entity.Null && key != 0 && links.TryGetBuffer(root, out var buffer))
             {
-                return buffer.AsHashMap<EntityLink, ObjectId, Entity>().TryGetValue(new ObjectId(key), out result);
+                return buffer.AsHashMap<EntityLink, ushort, Entity>().TryGetValue(key, out result);
             }
 
             result = Entity.Null;

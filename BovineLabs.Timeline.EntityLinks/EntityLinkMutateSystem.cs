@@ -1,5 +1,4 @@
 using BovineLabs.Core.Iterators;
-using BovineLabs.Core.ObjectManagement;
 using BovineLabs.Reaction.Data.Core;
 using BovineLabs.Timeline.Data;
 using BovineLabs.Timeline.EntityLinks.Data;
@@ -60,26 +59,24 @@ namespace BovineLabs.Timeline.EntityLinks
                 if (!Links.TryGetBuffer(root, out var buffer))
                     return;
 
-                var map = buffer.AsHashMap<EntityLink, ObjectId, Entity>();
-                var keyA = new ObjectId(mutate.LinkKey);
-
+                var map = buffer.AsHashMap<EntityLink, ushort, Entity>();
+                
                 switch (mutate.Mode)
                 {
                     case EntityLinkMutateMode.Assign:
-                        map[keyA] = targets.Get(mutate.NewTarget, bindingEntity, TargetsCustoms);
+                        map[mutate.LinkKey] = targets.Get(mutate.NewTarget, bindingEntity, TargetsCustoms);
                         break;
 
                     case EntityLinkMutateMode.Swap:
-                        var keyB = new ObjectId(mutate.SwapKey);
-                        var hasA = map.TryGetValue(keyA, out var targetA);
-                        var hasB = map.TryGetValue(keyB, out var targetB);
+                        var hasA = map.TryGetValue(mutate.LinkKey, out var targetA);
+                        var hasB = map.TryGetValue(mutate.SwapKey, out var targetB);
 
-                        if (hasA) map[keyB] = targetA; else map.Remove(keyB);
-                        if (hasB) map[keyA] = targetB; else map.Remove(keyA);
+                        if (hasA) map[mutate.SwapKey] = targetA; else map.Remove(mutate.SwapKey);
+                        if (hasB) map[mutate.LinkKey] = targetB; else map.Remove(mutate.LinkKey);
                         break;
 
                     case EntityLinkMutateMode.Remove:
-                        map.Remove(keyA);
+                        map.Remove(mutate.LinkKey);
                         break;
                 }
             }
